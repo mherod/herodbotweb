@@ -1,0 +1,74 @@
+version: 2
+references:
+  cache_key_dependencies: &cache_key_dependencies
+    key: deps-cache-{{ checksum "checksum_dump_config" }}
+  cache_key_build: &cache_key_build
+    key: build-cache-{{ checksum "checksum_dump_source" }}
+  restore_cache_dependencies: &restore_cache_dependencies
+    restore_cache:
+      <<: *cache_key_dependencies
+  restore_cache_build: &restore_cache_build
+    restore_cache:
+      <<: *cache_key_build
+  save_cache_dependencies: &save_cache_dependencies
+    save_cache:
+      <<: *cache_key_dependencies
+      paths:
+        - ~/.m2
+        - ~/.gradle
+  save_cache_build: &save_cache_build
+    save_cache:
+      <<: *cache_key_build
+      paths:
+        - ~/herodbotweb/.gradle
+        - ~/herodbotweb/build
+        - ~/herodbotweb/core/build
+        - ~/herodbotweb/database/build
+        - ~/herodbotweb/models/build
+        - ~/herodbotweb/web/build
+  workspace: &workspace ~/herodbotweb
+jobs:
+  build:
+    working_directory: *workspace
+    docker:
+      - image: circleci/openjdk:8-jdk
+    environment:
+      TERM: dumb
+      JVM_OPTS: "-Xmx3200m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3200m"'
+      PORT: 8080
+    steps:
+      - checkout
+      - run:
+          name: Write jvmargs to gradle.properties
+          command: |
+            echo "org.gradle.jvmargs=${JVM_OPTS}" >> gradle.properties
+            cat gradle.properties
+      - run:
+          name: Calculate checksum of source files
+          command: sh .circleci/checksum.sh
+      - *restore_cache_dependencies
+      - *restore_cache_build
+      - run: find . -type f -regex ".*/build/.*" -delete
+      - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
+      - run:
+          name: Quick smoke test
+          command: |
+            ./gradlew runShadow &
+            sleep 5
+            curl -L -v -f http://localhost:8080/
+      - *save_cache_dependencies
+      - *save_cache_build
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+      - store_test_results:
+          path: ~/junit
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build

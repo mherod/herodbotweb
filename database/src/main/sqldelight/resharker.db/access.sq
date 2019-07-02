@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS access
+(
+	token TEXT NOT NULL
+		CONSTRAINT access_pk
+			PRIMARY KEY
+);
+CREATE INDEX access_token ON access(token);

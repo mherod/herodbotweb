@@ -1,0 +1,3 @@
+rootProject.name = rootProject.projectDir.getName()
+include 'core', 'models', 'web', 'database'
+

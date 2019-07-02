@@ -1,0 +1,264 @@
+{
+  "url": "https://api.github.com/repos/MyUNiDAYS/testpot/compare/master...develop",
+  "html_url": "https://github.com/MyUNiDAYS/testpot/compare/master...develop",
+  "permalink_url": "https://github.com/MyUNiDAYS/testpot/compare/MyUNiDAYS:f453edc...MyUNiDAYS:090b79a",
+  "diff_url": "https://github.com/MyUNiDAYS/testpot/compare/master...develop.diff",
+  "patch_url": "https://github.com/MyUNiDAYS/testpot/compare/master...develop.patch",
+  "base_commit": {
+    "sha": "f453edc8566c3ee9979759af8321501c8007a372",
+    "node_id": "MDY6Q29tbWl0MTU4NzMwNDE3OmY0NTNlZGM4NTY2YzNlZTk5Nzk3NTlhZjgzMjE1MDFjODAwN2EzNzI=",
+    "commit": {
+      "author": {
+        "name": "Matthew Herod",
+        "email": "matthew.herod@myunidays.com",
+        "date": "2019-02-21T08:46:18Z"
+      },
+      "committer": {
+        "name": "Matthew Herod",
+        "email": "matthew.herod@myunidays.com",
+        "date": "2019-02-21T08:46:18Z"
+      },
+      "message": "Adjust deps some more",
+      "tree": {
+        "sha": "22bc67bebc8eb1c5aed9673205d0d7c0fd5c3fc8",
+        "url": "https://api.github.com/repos/MyUNiDAYS/testpot/git/trees/22bc67bebc8eb1c5aed9673205d0d7c0fd5c3fc8"
+      },
+      "url": "https://api.github.com/repos/MyUNiDAYS/testpot/git/commits/f453edc8566c3ee9979759af8321501c8007a372",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/f453edc8566c3ee9979759af8321501c8007a372",
+    "html_url": "https://github.com/MyUNiDAYS/testpot/commit/f453edc8566c3ee9979759af8321501c8007a372",
+    "comments_url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/f453edc8566c3ee9979759af8321501c8007a372/comments",
+    "author": {
+      "login": "mherod",
+      "id": 1882347,
+      "node_id": "MDQ6VXNlcjE4ODIzNDc=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1882347?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mherod",
+      "html_url": "https://github.com/mherod",
+      "followers_url": "https://api.github.com/users/mherod/followers",
+      "following_url": "https://api.github.com/users/mherod/following{/other_user}",
+      "gists_url": "https://api.github.com/users/mherod/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/mherod/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/mherod/subscriptions",
+      "organizations_url": "https://api.github.com/users/mherod/orgs",
+      "repos_url": "https://api.github.com/users/mherod/repos",
+      "events_url": "https://api.github.com/users/mherod/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/mherod/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "mherod",
+      "id": 1882347,
+      "node_id": "MDQ6VXNlcjE4ODIzNDc=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1882347?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mherod",
+      "html_url": "https://github.com/mherod",
+      "followers_url": "https://api.github.com/users/mherod/followers",
+      "following_url": "https://api.github.com/users/mherod/following{/other_user}",
+      "gists_url": "https://api.github.com/users/mherod/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/mherod/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/mherod/subscriptions",
+      "organizations_url": "https://api.github.com/users/mherod/orgs",
+      "repos_url": "https://api.github.com/users/mherod/repos",
+      "events_url": "https://api.github.com/users/mherod/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/mherod/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7f000fae1af1eaf9c97e4905fc78edb7cc4f31ec",
+        "url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/7f000fae1af1eaf9c97e4905fc78edb7cc4f31ec",
+        "html_url": "https://github.com/MyUNiDAYS/testpot/commit/7f000fae1af1eaf9c97e4905fc78edb7cc4f31ec"
+      }
+    ]
+  },
+  "merge_base_commit": {
+    "sha": "f453edc8566c3ee9979759af8321501c8007a372",
+    "node_id": "MDY6Q29tbWl0MTU4NzMwNDE3OmY0NTNlZGM4NTY2YzNlZTk5Nzk3NTlhZjgzMjE1MDFjODAwN2EzNzI=",
+    "commit": {
+      "author": {
+        "name": "Matthew Herod",
+        "email": "matthew.herod@myunidays.com",
+        "date": "2019-02-21T08:46:18Z"
+      },
+      "committer": {
+        "name": "Matthew Herod",
+        "email": "matthew.herod@myunidays.com",
+        "date": "2019-02-21T08:46:18Z"
+      },
+      "message": "Adjust deps some more",
+      "tree": {
+        "sha": "22bc67bebc8eb1c5aed9673205d0d7c0fd5c3fc8",
+        "url": "https://api.github.com/repos/MyUNiDAYS/testpot/git/trees/22bc67bebc8eb1c5aed9673205d0d7c0fd5c3fc8"
+      },
+      "url": "https://api.github.com/repos/MyUNiDAYS/testpot/git/commits/f453edc8566c3ee9979759af8321501c8007a372",
+      "comment_count": 0,
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null
+      }
+    },
+    "url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/f453edc8566c3ee9979759af8321501c8007a372",
+    "html_url": "https://github.com/MyUNiDAYS/testpot/commit/f453edc8566c3ee9979759af8321501c8007a372",
+    "comments_url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/f453edc8566c3ee9979759af8321501c8007a372/comments",
+    "author": {
+      "login": "mherod",
+      "id": 1882347,
+      "node_id": "MDQ6VXNlcjE4ODIzNDc=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1882347?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mherod",
+      "html_url": "https://github.com/mherod",
+      "followers_url": "https://api.github.com/users/mherod/followers",
+      "following_url": "https://api.github.com/users/mherod/following{/other_user}",
+      "gists_url": "https://api.github.com/users/mherod/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/mherod/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/mherod/subscriptions",
+      "organizations_url": "https://api.github.com/users/mherod/orgs",
+      "repos_url": "https://api.github.com/users/mherod/repos",
+      "events_url": "https://api.github.com/users/mherod/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/mherod/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "mherod",
+      "id": 1882347,
+      "node_id": "MDQ6VXNlcjE4ODIzNDc=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1882347?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/mherod",
+      "html_url": "https://github.com/mherod",
+      "followers_url": "https://api.github.com/users/mherod/followers",
+      "following_url": "https://api.github.com/users/mherod/following{/other_user}",
+      "gists_url": "https://api.github.com/users/mherod/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/mherod/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/mherod/subscriptions",
+      "organizations_url": "https://api.github.com/users/mherod/orgs",
+      "repos_url": "https://api.github.com/users/mherod/repos",
+      "events_url": "https://api.github.com/users/mherod/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/mherod/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7f000fae1af1eaf9c97e4905fc78edb7cc4f31ec",
+        "url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/7f000fae1af1eaf9c97e4905fc78edb7cc4f31ec",
+        "html_url": "https://github.com/MyUNiDAYS/testpot/commit/7f000fae1af1eaf9c97e4905fc78edb7cc4f31ec"
+      }
+    ]
+  },
+  "status": "ahead",
+  "ahead_by": 1,
+  "behind_by": 0,
+  "total_commits": 1,
+  "commits": [
+    {
+      "sha": "090b79ab50cc1dea6be1a20069f44c976dda96df",
+      "node_id": "MDY6Q29tbWl0MTU4NzMwNDE3OjA5MGI3OWFiNTBjYzFkZWE2YmUxYTIwMDY5ZjQ0Yzk3NmRkYTk2ZGY=",
+      "commit": {
+        "author": {
+          "name": "Matthew Herod",
+          "email": "matthew.herod@myunidays.com",
+          "date": "2019-02-24T08:37:44Z"
+        },
+        "committer": {
+          "name": "Matthew Herod",
+          "email": "matthew.herod@myunidays.com",
+          "date": "2019-02-24T08:37:44Z"
+        },
+        "message": "Update AGP plugin",
+        "tree": {
+          "sha": "2053fc0654da9fe0f180c296321292e6bf690afc",
+          "url": "https://api.github.com/repos/MyUNiDAYS/testpot/git/trees/2053fc0654da9fe0f180c296321292e6bf690afc"
+        },
+        "url": "https://api.github.com/repos/MyUNiDAYS/testpot/git/commits/090b79ab50cc1dea6be1a20069f44c976dda96df",
+        "comment_count": 0,
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null
+        }
+      },
+      "url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/090b79ab50cc1dea6be1a20069f44c976dda96df",
+      "html_url": "https://github.com/MyUNiDAYS/testpot/commit/090b79ab50cc1dea6be1a20069f44c976dda96df",
+      "comments_url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/090b79ab50cc1dea6be1a20069f44c976dda96df/comments",
+      "author": {
+        "login": "mherod",
+        "id": 1882347,
+        "node_id": "MDQ6VXNlcjE4ODIzNDc=",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/1882347?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mherod",
+        "html_url": "https://github.com/mherod",
+        "followers_url": "https://api.github.com/users/mherod/followers",
+        "following_url": "https://api.github.com/users/mherod/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mherod/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mherod/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mherod/subscriptions",
+        "organizations_url": "https://api.github.com/users/mherod/orgs",
+        "repos_url": "https://api.github.com/users/mherod/repos",
+        "events_url": "https://api.github.com/users/mherod/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mherod/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "committer": {
+        "login": "mherod",
+        "id": 1882347,
+        "node_id": "MDQ6VXNlcjE4ODIzNDc=",
+        "avatar_url": "https://avatars1.githubusercontent.com/u/1882347?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/mherod",
+        "html_url": "https://github.com/mherod",
+        "followers_url": "https://api.github.com/users/mherod/followers",
+        "following_url": "https://api.github.com/users/mherod/following{/other_user}",
+        "gists_url": "https://api.github.com/users/mherod/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/mherod/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/mherod/subscriptions",
+        "organizations_url": "https://api.github.com/users/mherod/orgs",
+        "repos_url": "https://api.github.com/users/mherod/repos",
+        "events_url": "https://api.github.com/users/mherod/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/mherod/received_events",
+        "type": "User",
+        "site_admin": false
+      },
+      "parents": [
+        {
+          "sha": "f453edc8566c3ee9979759af8321501c8007a372",
+          "url": "https://api.github.com/repos/MyUNiDAYS/testpot/commits/f453edc8566c3ee9979759af8321501c8007a372",
+          "html_url": "https://github.com/MyUNiDAYS/testpot/commit/f453edc8566c3ee9979759af8321501c8007a372"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "sha": "4aacd7d51af7d443321768db419d2389ad48ed0e",
+      "filename": "build.gradle",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/MyUNiDAYS/testpot/blob/090b79ab50cc1dea6be1a20069f44c976dda96df/build.gradle",
+      "raw_url": "https://github.com/MyUNiDAYS/testpot/raw/090b79ab50cc1dea6be1a20069f44c976dda96df/build.gradle",
+      "contents_url": "https://api.github.com/repos/MyUNiDAYS/testpot/contents/build.gradle?ref=090b79ab50cc1dea6be1a20069f44c976dda96df",
+      "patch": "@@ -32,7 +32,7 @@ buildscript {\n         jcenter()\n     }\n     dependencies {\n-        classpath 'com.android.tools.build:gradle:3.5.0-alpha04'\n+        classpath 'com.android.tools.build:gradle:3.5.0-alpha05'\n         //noinspection DifferentKotlinGradleVersion\n         classpath \"org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version\"\n     }"
+    }
+  ]
+}

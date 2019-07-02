@@ -1,0 +1,22 @@
+{
+  "name": "herodbotweb",
+  "description": "",
+  "repository": "https://github.com/mherod/herodbotweb",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/gradle"
+    }
+  ]
+}
