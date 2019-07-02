@@ -3,18 +3,16 @@ package dev.herod.bot.web
 import dagger.Module
 import dagger.Provides
 import io.ktor.client.HttpClient
-import io.ktor.client.features.json.GsonSerializer
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.JsonSerializer
-import javax.inject.Named
+import io.ktor.client.features.json.serializer.KotlinxSerializer
 
 @Module
 class WebModule {
 
     @Provides
-    fun provideJsonSerializer(): JsonSerializer = GsonSerializer()
+    fun provideJsonSerializer(): JsonSerializer = KotlinxSerializer()
 
-    @Named("ServerHttpClient")
     @Provides
     fun provideHttpClient(jsonSerializer: JsonSerializer): HttpClient = HttpClient {
         install(JsonFeature) {

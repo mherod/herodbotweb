@@ -5,6 +5,12 @@
   "scripts": {
   },
   "env": {
+    "FOURSQUARE_CLIENT_ID": {
+      "required": true
+    },
+    "FOURSQUARE_CLIENT_SECRET": {
+      "required": true
+    }
   },
   "formation": {
     "web": {
