@@ -1,21 +1,16 @@
 package dev.herod.foursquare
 
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Stats(
-        @Optional
         @SerialName("checkinsCount")
-        val checkinsCount: Int?,
-        @Optional
+        val checkinsCount: Int? = null,
         @SerialName("tipCount")
-        val tipCount: Int?,
-        @Optional
+        val tipCount: Int? = null,
         @SerialName("usersCount")
-        val usersCount: Int?,
-        @Optional
+        val usersCount: Int? = null,
         @SerialName("visitsCount")
-        val visitsCount: Int?
+        val visitsCount: Int? = null
 )

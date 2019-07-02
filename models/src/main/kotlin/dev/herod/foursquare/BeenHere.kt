@@ -1,21 +1,16 @@
 package dev.herod.foursquare
 
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class BeenHere(
-        @Optional
         @SerialName("count")
-        val count: Int?,
-        @Optional
+        val count: Int? = null,
         @SerialName("lastCheckinExpiredAt")
-        val lastCheckinExpiredAt: Int?,
-        @Optional
+        val lastCheckinExpiredAt: Int? = null,
         @SerialName("marked")
-        val marked: Boolean?,
-        @Optional
+        val marked: Boolean? = null,
         @SerialName("unconfirmedCount")
-        val unconfirmedCount: Int?
+        val unconfirmedCount: Int? = null
 )

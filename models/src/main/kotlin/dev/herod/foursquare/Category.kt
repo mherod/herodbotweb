@@ -1,27 +1,20 @@
 package dev.herod.foursquare
 
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Category(
-        @Optional
         @SerialName("icon")
-        val icon: Icon?,
-        @Optional
+        val icon: Icon? = null,
         @SerialName("id")
-        val id: String?,
-        @Optional
+        val id: String? = null,
         @SerialName("name")
-        val name: String?,
-        @Optional
+        val name: String? = null,
         @SerialName("pluralName")
-        val pluralName: String?,
-        @Optional
+        val pluralName: String? = null,
         @SerialName("primary")
-        val primary: Boolean?,
-        @Optional
+        val primary: Boolean? = null,
         @SerialName("shortName")
-        val shortName: String?
+        val shortName: String? = null
 )

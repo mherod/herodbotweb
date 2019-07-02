@@ -48,6 +48,8 @@ dependencies {
     testCompile(kotlinx("serialization-runtime", "0.11.0"))
     implementation("com.google.dagger:dagger:$dagger_version")
     kapt("com.google.dagger:dagger-compiler:$dagger_version")
+    testImplementation("com.google.dagger:dagger:$dagger_version")
+    kaptTest("com.google.dagger:dagger-compiler:$dagger_version")
 }
 
 sourceSets["main"].resources.srcDirs("src/main/resources")

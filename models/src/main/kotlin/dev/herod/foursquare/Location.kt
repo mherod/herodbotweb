@@ -1,42 +1,30 @@
 package dev.herod.foursquare
 
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Location(
-        @Optional
         @SerialName("cc")
-        val cc: String?,
-        @Optional
+        val cc: String? = null,
         @SerialName("city")
-        val city: String?,
-        @Optional
+        val city: String? = null,
         @SerialName("country")
-        val country: String?,
-        @Optional
+        val country: String? = null,
         @SerialName("crossStreet")
-        val crossStreet: String?,
-        @Optional
+        val crossStreet: String? = null,
         @SerialName("distance")
-        val distance: Int?,
-        @Optional
+        val distance: Int? = null,
         @SerialName("formattedAddress")
-        val formattedAddress: List<String?>?,
-        @Optional
+        val formattedAddress: List<String?>? = null,
         @SerialName("labeledLatLngs")
-        val labeledLatLngs: List<LabeledLatLng?>?,
-        @Optional
+        val labeledLatLngs: List<LabeledLatLng?>? = null,
         @SerialName("lat")
-        val lat: Double?,
-        @Optional
+        val lat: Double? = null,
         @SerialName("lng")
-        val lng: Double?,
-        @Optional
+        val lng: Double? = null,
         @SerialName("postalCode")
-        val postalCode: String?,
-        @Optional
+        val postalCode: String? = null,
         @SerialName("state")
-        val state: String?
+        val state: String? = null
 )

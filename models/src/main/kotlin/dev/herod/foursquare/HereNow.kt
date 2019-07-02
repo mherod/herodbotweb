@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HereNow(
         @SerialName("count")
-        val count: Int?,
+        val count: Int? = null,
         @SerialName("summary")
-        val summary: String?
+        val summary: String? = null
 )
