@@ -19,7 +19,7 @@ class FoursquareClientTest {
     @Test
     fun venueSearch() {
         runBlocking {
-            foursquareClient.venueSearch("53.475804", "-2.235979")
+            foursquareClient.venueSearch("53.475804", "-2.235979", query = "G-A-Y")
         }
     }
 }
