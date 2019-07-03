@@ -10,7 +10,8 @@
     },
     "FOURSQUARE_CLIENT_SECRET": {
       "required": true
-    }
+    },
+    "MONZO_ACCESS_TOKEN": {}
   },
   "formation": {
     "web": {

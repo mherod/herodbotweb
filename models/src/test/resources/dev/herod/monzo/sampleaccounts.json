@@ -1,0 +1,44 @@
+{
+  "accounts": [
+    {
+      "id": "acc_0ZZZzzz10Op79zzz1fTNeD",
+      "closed": true,
+      "created": "2016-03-31T14:00:00.000Z",
+      "description": "user_000004hPCnmzzz1ZZZzzz1",
+      "type": "uk_prepaid",
+      "currency": "GBP",
+      "country_code": "GB",
+      "owners": [
+        {
+          "user_id": "user_000004hPCnmzzz1ZZZzzz1",
+          "preferred_name": "Bot Herod",
+          "preferred_first_name": "Bot"
+        }
+      ]
+    },
+    {
+      "id": "acc_00000ROSYMiEalswMzzz1x",
+      "closed": false,
+      "created": "2017-12-01T10:00:00.000Z",
+      "description": "user_000004hPCnmzzz1ZZZzzz1",
+      "type": "uk_retail",
+      "currency": "GBP",
+      "country_code": "GB",
+      "owners": [
+        {
+          "user_id": "user_000004hPCnmzzz1ZZZzzz1",
+          "preferred_name": "Bot Herod",
+          "preferred_first_name": "Bot"
+        }
+      ],
+      "account_number": "0ZZZzzz1",
+      "sort_code": "000004",
+      "payment_details": {
+        "locale_uk": {
+          "account_number": "0ZZZzzz1",
+          "sort_code": "000004"
+        }
+      }
+    }
+  ]
+}
