@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MonzoAccountsResponse(
-        @SerialName("accounts")
-        val accounts: List<Account> = listOf()
+    @SerialName("accounts")
+    val accounts: List<Account> = listOf()
 )

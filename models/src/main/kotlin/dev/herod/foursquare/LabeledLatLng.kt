@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LabeledLatLng(
-        @SerialName("label")
-        val label: String? = null,
-        @SerialName("lat")
-        val lat: Double? = null,
-        @SerialName("lng")
-        val lng: Double? = null
+    @SerialName("label")
+    val label: String? = null,
+    @SerialName("lat")
+    val lat: Double? = null,
+    @SerialName("lng")
+    val lng: Double? = null
 )

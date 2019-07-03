@@ -11,8 +11,8 @@ import io.ktor.routing.route
 import javax.inject.Inject
 
 class Routes @Inject constructor(
-        private val webRoutesInstaller: WebRoutesInstaller,
-        private val foursquareRoutesInstaller: FoursquareRoutesInstaller
+    private val webRoutesInstaller: WebRoutesInstaller,
+    private val foursquareRoutesInstaller: FoursquareRoutesInstaller
 ) : RoutesInstaller {
 
     override fun install(route: Route) {

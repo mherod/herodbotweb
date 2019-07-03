@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class FoursquareVenueResponse(
-        @SerialName("meta")
-        val meta: Meta? = null,
-        @SerialName("response")
-        val response: Response? = null
+    @SerialName("meta")
+    val meta: Meta? = null,
+    @SerialName("response")
+    val response: Response? = null
 )

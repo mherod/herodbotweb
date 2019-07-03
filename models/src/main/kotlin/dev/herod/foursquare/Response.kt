@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Response(
-        @SerialName("confident")
-        val confident: Boolean? = null,
-        @SerialName("venues")
-        val venues: List<Venue?>? = null
+    @SerialName("confident")
+    val confident: Boolean? = null,
+    @SerialName("venues")
+    val venues: List<Venue?>? = null
 )

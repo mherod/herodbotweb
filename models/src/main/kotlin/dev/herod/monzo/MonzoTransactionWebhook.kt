@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MonzoTransactionWebhook(
-        @SerialName("data")
-        val `data`: Data = Data(),
-        @SerialName("type")
-        val type: String = ""
+    @SerialName("data")
+    val `data`: Data = Data(),
+    @SerialName("type")
+    val type: String = ""
 )

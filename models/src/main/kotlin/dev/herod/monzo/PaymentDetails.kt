@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PaymentDetails(
-        @SerialName("locale_uk")
-        val localeUk: LocaleUk = LocaleUk()
+    @SerialName("locale_uk")
+    val localeUk: LocaleUk = LocaleUk()
 )

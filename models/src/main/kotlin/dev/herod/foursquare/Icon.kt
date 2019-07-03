@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Icon(
-        @SerialName("prefix")
-        val prefix: String? = null,
-        @SerialName("suffix")
-        val suffix: String? = null
+    @SerialName("prefix")
+    val prefix: String? = null,
+    @SerialName("suffix")
+    val suffix: String? = null
 )

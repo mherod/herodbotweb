@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class VenuePage(
-        @SerialName("id")
-        val id: String? = null
+    @SerialName("id")
+    val id: String? = null
 )
