@@ -1,6 +1,7 @@
 package dev.herod.bot.web.framework.routes
 
 import dev.herod.bot.foursquare.FoursquareClient
+import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.monzo.MonzoTransactionWebhook
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

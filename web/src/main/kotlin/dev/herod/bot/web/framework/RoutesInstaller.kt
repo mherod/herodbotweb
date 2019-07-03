@@ -1,4 +1,4 @@
-package dev.herod.bot.web.framework.routes
+package dev.herod.bot.web.framework
 
 import io.ktor.routing.Route
 

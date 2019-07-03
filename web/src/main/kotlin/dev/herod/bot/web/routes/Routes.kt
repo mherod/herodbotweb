@@ -1,7 +1,7 @@
 package dev.herod.bot.web.routes
 
+import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.bot.web.framework.routes.FoursquareRoutesInstaller
-import dev.herod.bot.web.framework.routes.RoutesInstaller
 import io.ktor.application.call
 import io.ktor.response.respondRedirect
 import io.ktor.response.respondText
