@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
 
-    suspend fun venueSearch(longitude: String?, latitude: String?, intent: String = "checkin", query: String): FoursquareVenueResponse {
+    suspend fun searchVenue(longitude: String?, latitude: String?, intent: String = "checkin", query: String): FoursquareVenueResponse {
         return httpClient.get {
             url("https://api.foursquare.com/v2/venues/search?intent=$intent&query=$query&ll=$longitude,$latitude&client_id=${getenv("FOURSQUARE_CLIENT_ID")}&client_secret=${getenv("FOURSQUARE_CLIENT_SECRET")}&v=20180323")
         }

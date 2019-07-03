@@ -19,7 +19,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
             val receive = call.receive<MonzoTransactionWebhook>()
             val name = receive.data.merchant.name
             val address = receive.data.merchant.address
-            val venue = foursquareClient.venueSearch(
+            val venue = foursquareClient.searchVenue(
                     longitude = "${address.longitude}",
                     latitude = "${address.latitude}",
                     intent = "match",
