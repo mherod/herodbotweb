@@ -14,6 +14,7 @@ import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.route
+import java.sql.PreparedStatement
 import javax.inject.Inject
 
 class Routes @Inject constructor(
@@ -33,7 +34,9 @@ class Routes @Inject constructor(
                                 request.uri,
                                 request.postBody()
                             )
-                        )
+                        )?.use { preparedStatement: PreparedStatement ->
+                            preparedStatement.execute()
+                        }
                     }
                 }
             }
