@@ -37,11 +37,10 @@ class Routes @Inject constructor(
                 if (request.httpMethod == HttpMethod.Post) {
                     DbConnection.getMyDbConnection().use { connection ->
                         connection.prepareStatement(
-                            "INSERT INTO \"postings\" (\"id\", \"blob\", \"url\") VALUES (DEFAULT, ?, ?)", arrayOf(
-                                request.uri,
-                                request.postBody()
-                            )
+                            "INSERT INTO \"postings\" (\"id\", \"blob\", \"url\") VALUES (DEFAULT, ?, ?)"
                         )?.use { preparedStatement: PreparedStatement ->
+                            preparedStatement.setString(1, request.uri)
+                            preparedStatement.setString(2, request.postBody())
                             preparedStatement.execute()
                         }
                     }
