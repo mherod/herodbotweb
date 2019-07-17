@@ -7,12 +7,15 @@ import dev.herod.bot.web.postBody
 import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.call
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.httpMethod
 import io.ktor.request.uri
+import io.ktor.response.respond
 import io.ktor.response.respondRedirect
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
+import io.ktor.routing.post
 import io.ktor.routing.route
 import java.sql.PreparedStatement
 import javax.inject.Inject
@@ -24,8 +27,12 @@ class Routes @Inject constructor(
 
     override fun install(route: Route) {
 
+        route.post {
+            call.respond(HttpStatusCode.OK)
+        }
+
         route.apply {
-            intercept(ApplicationCallPipeline.Setup) {
+            intercept(ApplicationCallPipeline.Monitoring) {
                 val request = call.request
                 if (request.httpMethod == HttpMethod.Post) {
                     DbConnection.getMyDbConnection().use { connection ->
@@ -41,6 +48,7 @@ class Routes @Inject constructor(
                 }
             }
         }
+
         route.route("/") {
             get {
                 call.respondText {
