@@ -16,15 +16,22 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
     override fun install(route: Route) {
 
         route.post("/monzo") {
+
             val receive = call.receive<MonzoTransactionWebhook>()
             val name = receive.data.merchant.name
             val address = receive.data.merchant.address
+
             val venue = foursquareClient.searchVenue(
                     longitude = "${address.longitude}",
                     latitude = "${address.latitude}",
                     intent = "match",
                     query = name
+            ).response?.venues?.firstOrNull() ?: foursquareClient.searchVenue(
+                longitude = "${address.longitude}",
+                latitude = "${address.latitude}",
+                query = name
             ).response?.venues?.firstOrNull()
+
             venue?.id?.let { venueId ->
                 foursquareClient.venueCheckin(venueId)
             }
