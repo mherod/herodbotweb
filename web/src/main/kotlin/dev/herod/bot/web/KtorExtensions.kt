@@ -44,7 +44,7 @@ suspend inline fun <reified T : Any> ApplicationCall.respondJson(crossinline t: 
     )
 }
 
-suspend inline fun ApplicationCall.respondText2(crossinline t: ApplicationCall.() -> String) {
+suspend inline fun ApplicationCall.respondText2(crossinline t: suspend ApplicationCall.() -> String) {
     respondText(
             t(this),
             ContentType.Text.Any
