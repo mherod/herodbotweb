@@ -3,7 +3,6 @@ package dev.herod.bot.web.framework.routes
 import dev.herod.bot.foursquare.FoursquareClient
 import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.bot.web.respondJson
-import dev.herod.bot.web.respondText2
 import dev.herod.monzo.MonzoTransactionWebhook
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -33,7 +32,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
         }
 
         route.post("/checkin") {
-            call.respondText2 {
+            call.respondJson {
                 foursquareClient.venueCheckin("${parameters["id"]}")
             }
         }
