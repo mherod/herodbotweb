@@ -1,5 +1,6 @@
 package dev.herod.bot.web.framework.routes
 
+import dev.herod.bot.db.DbConnection
 import dev.herod.bot.foursquare.FoursquareClient
 import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.bot.web.respondJson
@@ -18,7 +19,15 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
     override fun install(route: Route) {
 
         route.get("/oauth_redirect") {
-            call.respond(HttpStatusCode.OK)
+            call.respondJson {
+                DbConnection.getMyDbConnection().use { connection ->
+                    connection.prepareStatement("INSERT INTO secrets (key, value) VALUES ('?', '?');")
+                        .use { statement ->
+                            statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
+                            statement.setString(2, "${parameters["code"]}")
+                        }
+                }
+            }
         }
 
         route.get("/search") {
