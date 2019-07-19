@@ -18,6 +18,10 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
 
     override fun install(route: Route) {
 
+        route.get("/oauth_redirect") {
+            call.respond(HttpStatusCode.OK)
+        }
+
         route.get("/search") {
             call.respondJson {
                 foursquareClient.searchVenue(

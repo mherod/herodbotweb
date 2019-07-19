@@ -1,5 +1,6 @@
 package dev.herod.bot.foursquare
 
+import dev.herod.foursquare.FoursquareCheckinResponse
 import dev.herod.foursquare.FoursquareVenueResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -28,12 +29,13 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
         }
     }
 
-    suspend fun venueCheckin(venueId: String): String {
+    suspend fun venueCheckin(venueId: String): FoursquareCheckinResponse {
 
         val params = mapOf(
             "venueId" to venueId,
             "client_id" to getenv("FOURSQUARE_CLIENT_ID"),
             "client_secret" to getenv("FOURSQUARE_CLIENT_SECRET"),
+            "oauth_token" to getenv("FOURSQUARE_ACCESS_TOKEN"),
             "v" to "20180323"
         )
 
