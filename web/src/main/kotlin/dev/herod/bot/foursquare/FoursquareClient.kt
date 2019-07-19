@@ -5,6 +5,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.url
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
 import java.lang.System.getenv
 import javax.inject.Inject
 
@@ -19,6 +21,7 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
     suspend fun venueCheckin(venueId: String): String {
         return httpClient.post {
             url("https://api.foursquare.com/v2/checkins/add?venueId=$venueId&client_id=${getenv("FOURSQUARE_CLIENT_ID")}&client_secret=${getenv("FOURSQUARE_CLIENT_SECRET")}&v=20180323")
+            contentType(ContentType.Application.Json)
             body = mapOf("venueId" to venueId)
         }
     }
