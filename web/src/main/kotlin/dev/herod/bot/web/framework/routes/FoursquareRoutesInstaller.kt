@@ -21,7 +21,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
         route.get("/oauth_redirect") {
             call.respondJson {
                 DbConnection.getMyDbConnection().use { connection ->
-                    connection.prepareStatement("INSERT INTO secrets (key, value) VALUES ('?', '?');")
+                    connection.prepareStatement("INSERT INTO secrets (key, value) VALUES (?, ?);")
                         .use { statement ->
                             statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
                             statement.setString(2, "${parameters["code"]}")
