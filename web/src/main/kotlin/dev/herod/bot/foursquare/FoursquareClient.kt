@@ -19,6 +19,7 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
     suspend fun venueCheckin(venueId: String): String {
         return httpClient.post {
             url("https://api.foursquare.com/v2/checkins/add?venueId=$venueId&client_id=${getenv("FOURSQUARE_CLIENT_ID")}&client_secret=${getenv("FOURSQUARE_CLIENT_SECRET")}&v=20180323")
+            body = mapOf("venueId" to venueId)
         }
     }
 }
