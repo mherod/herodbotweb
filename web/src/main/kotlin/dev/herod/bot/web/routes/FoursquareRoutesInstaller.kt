@@ -1,4 +1,4 @@
-package dev.herod.bot.web.framework.routes
+package dev.herod.bot.web.routes
 
 import com.google.gson.Gson
 import dev.herod.bot.db.DbConnection

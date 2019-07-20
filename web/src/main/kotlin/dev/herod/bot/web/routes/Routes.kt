@@ -2,12 +2,14 @@ package dev.herod.bot.web.routes
 
 import dev.herod.bot.db.DbConnection
 import dev.herod.bot.web.framework.RoutesInstaller
-import dev.herod.bot.web.framework.routes.FoursquareRoutesInstaller
 import dev.herod.bot.web.postBody
 import io.ktor.application.ApplicationCallPipeline
 import io.ktor.application.call
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.default
+import io.ktor.http.content.files
+import io.ktor.http.content.static
 import io.ktor.request.httpMethod
 import io.ktor.request.uri
 import io.ktor.response.respond
@@ -17,6 +19,7 @@ import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
+import java.io.File
 import java.sql.PreparedStatement
 import javax.inject.Inject
 
@@ -49,9 +52,13 @@ class Routes @Inject constructor(
         }
 
         route.route("/") {
-            get {
+            static {
+                files("static")
+                default("static/index.html")
+            }
+            get("/hi") {
                 call.respondText {
-                    "Herodbot [ ${call.parameters} ]"
+                    "Herodbot [ ${call.parameters} ] [${File(".").absolutePath}]"
                 }
             }
             webRoutesInstaller.install(this)
