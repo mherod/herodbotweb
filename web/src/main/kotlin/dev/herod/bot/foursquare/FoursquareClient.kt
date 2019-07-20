@@ -15,24 +15,29 @@ import javax.inject.Inject
 
 class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
 
-    fun getOauthAuthenticationUrl(): String = url {
-        protocol = URLProtocol.HTTPS
-        host = "foursquare.com"
-        path("oauth2", "authenticate")
-        parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
-        parameters.append("response_type", "code")
-        parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
-    }
+    val oauthAuthenticationUrl: String
+        get() = url {
+            protocol = URLProtocol.HTTPS
+            host = "foursquare.com"
+            path("oauth2", "authenticate")
+            parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
+            parameters.append("response_type", "code")
+            parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
+        }
 
-    fun getOauthAccessTokenUrl(code: String?): String = url {
-        protocol = URLProtocol.HTTPS
-        host = "foursquare.com"
-        path("oauth2", "authenticate")
-        parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
-        parameters.append("client_secret", getenv("FOURSQUARE_CLIENT_SECRET"))
-        parameters.append("grant_type", "authorization_code")
-        parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
-        parameters.append("code", "$code")
+    suspend fun requestAccessToken(code: String?): String {
+        return httpClient.get {
+            url {
+                protocol = URLProtocol.HTTPS
+                host = "foursquare.com"
+                path("oauth2", "authenticate")
+                parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
+                parameters.append("client_secret", getenv("FOURSQUARE_CLIENT_SECRET"))
+                parameters.append("grant_type", "authorization_code")
+                parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
+                parameters.append("code", "$code")
+            }
+        }
     }
 
     suspend fun searchVenue(

@@ -21,7 +21,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
     override fun install(route: Route) {
 
         route.get("/oauth") {
-            call.respondRedirect(foursquareClient.getOauthAuthenticationUrl())
+            call.respondRedirect(foursquareClient.oauthAuthenticationUrl)
         }
 
         route.get("/oauth_redirect") {
@@ -35,7 +35,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
                     }
             }
             call.respondText {
-                foursquareClient.getOauthAccessTokenUrl(code)
+                foursquareClient.requestAccessToken(code)
             }
         }
 
