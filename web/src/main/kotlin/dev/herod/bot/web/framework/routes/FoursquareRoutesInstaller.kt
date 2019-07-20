@@ -24,17 +24,21 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
         }
 
         route.get("/oauth_redirect") {
-            val code = call.parameters["code"]
-            val token = foursquareClient.requestAccessToken(code)
-            DbConnection.getMyDbConnection().use { connection ->
-                connection.prepareStatement("INSERT INTO secrets (key, value)\nVALUES (?, ?)\nON CONFLICT DO UPDATE SET value = excluded.value;")
-                    .use { statement ->
-                        statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
-                        statement.setString(2, "$token")
-                        statement.execute()
-                    }
+            runCatching {
+                foursquareClient.requestAccessToken("${call.parameters["code"]}")
+            }.onFailure {
+                call.respondRedirect(foursquareClient.oauthAuthenticationUrl)
+            }.onSuccess { token ->
+                DbConnection.getMyDbConnection().use { connection ->
+                    connection.prepareStatement("INSERT INTO secrets (key, value)\nVALUES (?, ?)\nON CONFLICT DO UPDATE SET value = excluded.value;")
+                        .use { statement ->
+                            statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
+                            statement.setString(2, "$token")
+                            statement.execute()
+                        }
+                }
+                call.respond(HttpStatusCode.Created)
             }
-            call.respond(HttpStatusCode.Created)
         }
 
         route.get("/search") {
