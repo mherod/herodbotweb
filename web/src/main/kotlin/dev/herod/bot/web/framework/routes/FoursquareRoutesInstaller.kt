@@ -1,5 +1,6 @@
 package dev.herod.bot.web.framework.routes
 
+import com.google.gson.Gson
 import dev.herod.bot.db.DbConnection
 import dev.herod.bot.foursquare.FoursquareClient
 import dev.herod.bot.web.framework.RoutesInstaller
@@ -66,7 +67,8 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
         }
 
         route.post("/monzo") {
-            call.receive<MonzoTransactionWebhook>().let { receive ->
+            call.receive<String>().let { receive1 ->
+                val receive = Gson().fromJson(receive1, MonzoTransactionWebhook::class.java)
                 val name = receive.data.merchant.name
                 val address = receive.data.merchant.address
                 searchVenue(
