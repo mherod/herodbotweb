@@ -10,7 +10,6 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.response.respondRedirect
-import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -26,17 +25,16 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
 
         route.get("/oauth_redirect") {
             val code = call.parameters["code"]
+            val token = foursquareClient.requestAccessToken(code)
             DbConnection.getMyDbConnection().use { connection ->
                 connection.prepareStatement("INSERT INTO secrets (key, value) VALUES (?, ?);")
                     .use { statement ->
                         statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
-                        statement.setString(2, "$code")
+                        statement.setString(2, "$token")
                         statement.execute()
                     }
             }
-            call.respondText {
-                foursquareClient.requestAccessToken(code)
-            }
+            call.respond(HttpStatusCode.Created)
         }
 
         route.get("/search") {

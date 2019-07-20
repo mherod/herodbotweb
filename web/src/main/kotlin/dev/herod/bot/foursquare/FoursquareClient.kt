@@ -1,5 +1,6 @@
 package dev.herod.bot.foursquare
 
+import dev.herod.AccessTokenResponse
 import dev.herod.foursquare.FoursquareCheckinResponse
 import dev.herod.foursquare.FoursquareVenueResponse
 import io.ktor.client.HttpClient
@@ -25,12 +26,12 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
             parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
         }
 
-    suspend fun requestAccessToken(code: String?): String {
+    suspend fun requestAccessToken(code: String?): AccessTokenResponse {
         return httpClient.get {
             url {
                 protocol = URLProtocol.HTTPS
                 host = "foursquare.com"
-                path("oauth2", "authenticate")
+                path("oauth2", "access_token")
                 parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
                 parameters.append("client_secret", getenv("FOURSQUARE_CLIENT_SECRET"))
                 parameters.append("grant_type", "authorization_code")
