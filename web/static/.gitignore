@@ -1,1 +1,3 @@
 node_modules
+_pgbackup
+_pgexport
