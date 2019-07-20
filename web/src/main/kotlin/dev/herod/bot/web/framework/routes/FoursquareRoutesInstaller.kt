@@ -35,7 +35,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
                     connection.prepareStatement("INSERT INTO secrets (key, value)\nVALUES (?, ?)\nON CONFLICT (key) DO UPDATE SET value = excluded.value;")
                         .use { statement ->
                             statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
-                            statement.setString(2, "$token")
+                            statement.setString(2, token.accessToken)
                             statement.execute()
                         }
                 }
