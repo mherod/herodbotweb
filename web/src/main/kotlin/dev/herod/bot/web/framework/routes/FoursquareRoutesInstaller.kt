@@ -9,6 +9,8 @@ import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
+import io.ktor.response.respondRedirect
+import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
 import io.ktor.routing.post
@@ -18,15 +20,22 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
 
     override fun install(route: Route) {
 
+        route.get("/oauth") {
+            call.respondRedirect(foursquareClient.getOauthAuthenticationUrl())
+        }
+
         route.get("/oauth_redirect") {
-            call.respondJson {
-                DbConnection.getMyDbConnection().use { connection ->
-                    connection.prepareStatement("INSERT INTO secrets (key, value) VALUES (?, ?);")
-                        .use { statement ->
-                            statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
-                            statement.setString(2, "${parameters["code"]}")
-                        }
-                }
+            val code = call.parameters["code"]
+            DbConnection.getMyDbConnection().use { connection ->
+                connection.prepareStatement("INSERT INTO secrets (key, value) VALUES (?, ?);")
+                    .use { statement ->
+                        statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
+                        statement.setString(2, "$code")
+                        statement.execute()
+                    }
+            }
+            call.respondText {
+                foursquareClient.getOauthAccessTokenUrl(code)
             }
         }
 
@@ -53,10 +62,10 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
             val address = receive.data.merchant.address
 
             val venue = foursquareClient.searchVenue(
-                    longitude = "${address.longitude}",
-                    latitude = "${address.latitude}",
-                    intent = "match",
-                    query = name
+                longitude = "${address.longitude}",
+                latitude = "${address.latitude}",
+                intent = "match",
+                query = name
             ).response?.venues?.firstOrNull() ?: foursquareClient.searchVenue(
                 longitude = "${address.longitude}",
                 latitude = "${address.latitude}",

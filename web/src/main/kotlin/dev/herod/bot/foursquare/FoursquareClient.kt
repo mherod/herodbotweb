@@ -9,10 +9,31 @@ import io.ktor.client.request.url
 import io.ktor.http.ContentType
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
+import io.ktor.util.url
 import java.lang.System.getenv
 import javax.inject.Inject
 
 class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
+
+    fun getOauthAuthenticationUrl(): String = url {
+        protocol = URLProtocol.HTTPS
+        host = "foursquare.com"
+        path("oauth2", "authenticate")
+        parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
+        parameters.append("response_type", "code")
+        parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
+    }
+
+    fun getOauthAccessTokenUrl(code: String?): String = url {
+        protocol = URLProtocol.HTTPS
+        host = "foursquare.com"
+        path("oauth2", "authenticate")
+        parameters.append("client_id", getenv("FOURSQUARE_CLIENT_ID"))
+        parameters.append("client_secret", getenv("FOURSQUARE_CLIENT_SECRET"))
+        parameters.append("grant_type", "authorization_code")
+        parameters.append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
+        parameters.append("code", "$code")
+    }
 
     suspend fun searchVenue(
         longitude: String?,
@@ -44,7 +65,7 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
                 protocol = URLProtocol.HTTPS
                 host = "api.foursquare.com"
                 path("v2", "checkins", "add")
-                for ((key, value) in params) {
+                params.forEach { (key, value) ->
                     parameters.append(key, value)
                 }
             }

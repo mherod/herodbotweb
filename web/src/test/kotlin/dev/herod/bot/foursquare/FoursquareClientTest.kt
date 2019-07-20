@@ -18,6 +18,14 @@ class FoursquareClientTest {
     }
 
     @Test
+    fun oauthUrl() {
+        assertEquals(
+            "",
+            foursquareClient.getOauthAuthenticationUrl()
+        )
+    }
+
+    @Test
     fun searchVenue() {
         runBlocking {
             val foursquareVenueResponse = foursquareClient.searchVenue(
