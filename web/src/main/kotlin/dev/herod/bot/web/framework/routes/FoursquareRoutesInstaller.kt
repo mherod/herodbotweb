@@ -61,7 +61,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
                     longitude = parameters["lon"].takeUnless { it.isNullOrBlank() }!!.toDoubleOrNull()!!,
                     latitude = parameters["lat"].takeUnless { it.isNullOrBlank() }!!.toDoubleOrNull()!!,
                     name = "${parameters["id"].takeUnless { it.isNullOrBlank() }}"
-                )?.checkin() ?: emptyList()
+                )?.checkin() ?: emptyList<String>()
             }
         }
 
