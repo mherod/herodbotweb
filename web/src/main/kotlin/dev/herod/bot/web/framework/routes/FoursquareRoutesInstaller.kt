@@ -30,7 +30,7 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
                 call.respondRedirect(foursquareClient.oauthAuthenticationUrl)
             }.onSuccess { token ->
                 DbConnection.getMyDbConnection().use { connection ->
-                    connection.prepareStatement("INSERT INTO secrets (key, value)\nVALUES (?, ?)\nON CONFLICT (value) DO UPDATE SET value = excluded.value;")
+                    connection.prepareStatement("INSERT INTO secrets (key, value)\nVALUES (?, ?)\nON CONFLICT (key) DO UPDATE SET value = excluded.value;")
                         .use { statement ->
                             statement.setString(1, "FOURSQUARE_ACCESS_TOKEN")
                             statement.setString(2, "$token")
