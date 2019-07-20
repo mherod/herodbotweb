@@ -4,6 +4,8 @@ import dev.herod.bot.db.DbConnection
 import dev.herod.bot.foursquare.FoursquareClient
 import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.bot.web.respondJson
+import dev.herod.foursquare.FoursquareCheckinResponse
+import dev.herod.foursquare.Venue
 import dev.herod.monzo.MonzoTransactionWebhook
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -53,31 +55,49 @@ class FoursquareRoutesInstaller @Inject constructor(private val foursquareClient
 
         route.post("/checkin") {
             call.respondJson {
-                foursquareClient.venueCheckin("${parameters["id"]}")
+                parameters["id"].takeUnless { it.isNullOrBlank() }?.let { id ->
+                    foursquareClient.venueCheckin(id)
+                } ?: searchVenue(
+                    longitude = parameters["lon"].takeUnless { it.isNullOrBlank() }!!.toDoubleOrNull()!!,
+                    latitude = parameters["lat"].takeUnless { it.isNullOrBlank() }!!.toDoubleOrNull()!!,
+                    name = "${parameters["id"].takeUnless { it.isNullOrBlank() }}"
+                )?.checkin() ?: emptyList()
             }
         }
 
         route.post("/monzo") {
-
-            val receive = call.receive<MonzoTransactionWebhook>()
-            val name = receive.data.merchant.name
-            val address = receive.data.merchant.address
-
-            val venue = foursquareClient.searchVenue(
-                longitude = "${address.longitude}",
-                latitude = "${address.latitude}",
-                intent = "match",
-                query = name
-            ).response?.venues?.firstOrNull() ?: foursquareClient.searchVenue(
-                longitude = "${address.longitude}",
-                latitude = "${address.latitude}",
-                query = name
-            ).response?.venues?.firstOrNull()
-
-            venue?.id?.let { venueId ->
-                foursquareClient.venueCheckin(venueId)
+            call.receive<MonzoTransactionWebhook>().let { receive ->
+                val name = receive.data.merchant.name
+                val address = receive.data.merchant.address
+                searchVenue(
+                    longitude = address.longitude,
+                    latitude = address.latitude,
+                    name = name
+                )?.checkin()?.let {
+                    call.respond(HttpStatusCode.Created)
+                } ?: run {
+                    call.respond(HttpStatusCode.Conflict)
+                }
             }
-            call.respond(HttpStatusCode.Accepted)
         }
+    }
+
+    private suspend fun searchVenue(
+        longitude: Double,
+        latitude: Double,
+        name: String
+    ): Venue? = foursquareClient.searchVenue(
+        longitude = "$longitude",
+        latitude = "$latitude",
+        intent = "match",
+        query = name
+    ).response?.venues?.firstOrNull() ?: foursquareClient.searchVenue(
+        longitude = "$longitude",
+        latitude = "$latitude",
+        query = name
+    ).response?.venues?.firstOrNull()
+
+    private suspend fun Venue.checkin(): FoursquareCheckinResponse? {
+        return runCatching { id?.let { foursquareClient.venueCheckin(it) } }.getOrNull()
     }
 }
