@@ -25,7 +25,8 @@ import javax.inject.Inject
 
 class Routes @Inject constructor(
     private val webRoutesInstaller: WebRoutesInstaller,
-    private val foursquareRoutesInstaller: FoursquareRoutesInstaller
+    private val foursquareRoutesInstaller: FoursquareRoutesInstaller,
+    private val spotifyRoutesInstaller: SpotifyRoutesInstaller
 ) : RoutesInstaller {
 
     override fun install(route: Route) {
@@ -66,6 +67,9 @@ class Routes @Inject constructor(
         route.route("/api") {
             route("/4sq") {
                 foursquareRoutesInstaller.install(this)
+            }
+            route("/spotify") {
+                spotifyRoutesInstaller.install(this)
             }
         }
         route.get("dump") {
