@@ -4,7 +4,6 @@ import dev.herod.bot.db.DbConnection.getMyDbConnection
 import java.sql.ResultSet
 
 fun checkAccessToken(inputToken: String?): Boolean {
-
     inputToken ?: return false
 
     val output: MutableList<String> = mutableListOf()

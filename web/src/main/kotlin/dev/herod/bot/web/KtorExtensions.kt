@@ -18,8 +18,8 @@ suspend fun ApplicationRequest.postBody(): String = receiveChannel().toByteArray
 val ApplicationCall.allParameters: Map<String, String>
     get() = HashMap<String, String>().apply {
         request.headers.getAll("Cookie")
-                ?.map { parseClientCookiesHeader(it) }
-                ?.forEach { putAll(it) }
+            ?.map { parseClientCookiesHeader(it) }
+            ?.forEach { putAll(it) }
         parameters.names().forEach { name ->
             put(name, parameters[name].orEmpty())
         }
@@ -31,22 +31,22 @@ suspend inline fun <reified T : Any> ApplicationCall.respondJson(
 ) {
     val obj = t.invoke(this)
     respondText(
-            Json.stringify(serializer, obj).trim(),
-            ContentType.Application.Json
+        Json.stringify(serializer, obj).trim(),
+        ContentType.Application.Json
     )
 }
 
 suspend inline fun <reified T : Any> ApplicationCall.respondJson(crossinline t: suspend ApplicationCall.() -> T) {
     val obj = t.invoke(this)
     respondText(
-            Gson().toJson(obj),
-            ContentType.Application.Json
+        Gson().toJson(obj),
+        ContentType.Application.Json
     )
 }
 
 suspend inline fun ApplicationCall.respondText2(crossinline t: suspend ApplicationCall.() -> String) {
     respondText(
-            t(this),
-            ContentType.Text.Any
+        t(this),
+        ContentType.Text.Any
     )
 }

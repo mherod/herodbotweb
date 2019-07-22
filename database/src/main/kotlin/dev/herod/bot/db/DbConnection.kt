@@ -1,5 +1,6 @@
 package dev.herod.bot.db
 
+import dev.herod.bot.getEnv
 import java.net.URI
 import java.net.URISyntaxException
 import java.sql.Connection
@@ -10,8 +11,7 @@ object DbConnection {
 
     @Throws(URISyntaxException::class, SQLException::class)
     fun getMyDbConnection(): Connection {
-
-        val dbUri = URI(System.getenv("DATABASE_URL"))
+        val dbUri = URI(getEnv("DATABASE_URL"))
         val userInfo = dbUri.userInfo
         val username = userInfo.substringBefore(':')
         val password = userInfo.substringAfter(':')

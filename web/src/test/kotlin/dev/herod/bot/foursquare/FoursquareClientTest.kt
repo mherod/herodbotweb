@@ -21,9 +21,9 @@ class FoursquareClientTest {
     fun searchVenue() {
         runBlocking {
             val foursquareVenueResponse = foursquareClient.searchVenue(
-                    longitude = "53.475804",
-                    latitude = "-2.235979",
-                    query = "G-A-Y"
+                longitude = "53.475804",
+                latitude = "-2.235979",
+                query = "G-A-Y"
             )
             val venue = foursquareVenueResponse.response!!.venues!!.first()!!
             assertEquals(venue.name, "G-A-Y")
