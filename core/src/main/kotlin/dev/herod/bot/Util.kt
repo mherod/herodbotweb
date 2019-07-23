@@ -4,9 +4,13 @@ import java.io.File
 
 fun getEnv(name: String): String {
     return runCatching { getEnv(name) }
-        .recover {
-            File("../.env").readLines()
+            .getOrElse { getEnvFromFile(name) }
+}
+
+private fun getEnvFromFile(name: String): String {
+    return runCatching {
+        File("../.env").readLines()
                 .first { it.startsWith("$name=") }
                 .substringAfter('=')
-        }.getOrThrow()
+    }.getOrThrow()
 }
