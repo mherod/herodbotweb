@@ -10,6 +10,11 @@ import javax.inject.Inject
 
 class WebRoutesInstaller @Inject constructor() : RoutesInstaller {
     override fun install(route: Route) {
+        route.get {
+            call.respondText {
+                "Hello $call"
+            }
+        }
         route.get("/check") {
             val token = call.parameters["token"] ?: throw Throwable()
             val found = checkAccessToken(token)
