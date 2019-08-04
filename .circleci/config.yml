@@ -54,6 +54,7 @@ jobs:
       - run: gcloud auth activate-service-account ${GOOGLE_SERVICE_ACCOUNT} --key-file key.json
       - run: yes | gcloud projects list --format='value(project_id)' || true
       - run: gcloud config set project $(gcloud projects list --format='value(project_id)' | head -n1)
+      - run: env >| web/src/main/resources/env.properties
       - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
       - run: ./gradlew appengineStart
       - run: curl -L -v -f http://localhost:8080/
