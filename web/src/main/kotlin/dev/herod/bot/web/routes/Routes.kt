@@ -1,7 +1,7 @@
 package dev.herod.bot.web.routes
 
+import dev.herod.bot.EnvPropertyFinder
 import dev.herod.bot.db.DbConnection
-import dev.herod.bot.getEnv
 import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.bot.web.postBody
 import io.ktor.application.ApplicationCallPipeline
@@ -75,7 +75,7 @@ class Routes @Inject constructor(
         }
 
         route.get("dump") {
-            println(getEnv("DATABASE_URL"))
+            println(EnvPropertyFinder.getEnv("DATABASE_URL"))
             call.respondRedirect {
                 port = 443
                 path("")

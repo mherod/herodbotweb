@@ -8,5 +8,5 @@ import javax.inject.Named
 class CoreModule {
     @Provides
     @Named("ENV_HOME")
-    fun provideEnvironmentHomePath(): String = getEnv("HOME")
+    fun provideEnvironmentHomePath(): String = EnvPropertyFinder.getEnv("HOME")
 }

@@ -1,7 +1,7 @@
 package dev.herod.bot.spotify
 
 import dev.herod.AccessTokenResponse
-import dev.herod.bot.getEnv
+import dev.herod.bot.EnvPropertyFinder
 import io.ktor.client.HttpClient
 import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.post
@@ -18,7 +18,7 @@ class SpotifyClient @Inject constructor(private val httpClient: HttpClient) {
             host = "accounts.spotify.com"
             path("authorize")
             with(parameters) {
-                append("client_id", getEnv("SPOTIFY_CLIENT_ID"))
+                append("client_id", EnvPropertyFinder.getEnv("SPOTIFY_CLIENT_ID"))
                 append("response_type", "code")
                 append("redirect_uri", "https://bot.herod.dev/api/spotify/oauth_redirect")
             }
@@ -32,8 +32,8 @@ class SpotifyClient @Inject constructor(private val httpClient: HttpClient) {
                 path("api", "token")
                 body = FormDataContent(
                     Parameters.build {
-                        append("client_id", getEnv("SPOTIFY_CLIENT_ID"))
-                        append("client_secret", getEnv("SPOTIFY_CLIENT_SECRET"))
+                        append("client_id", EnvPropertyFinder.getEnv("SPOTIFY_CLIENT_ID"))
+                        append("client_secret", EnvPropertyFinder.getEnv("SPOTIFY_CLIENT_SECRET"))
                         append("grant_type", "authorization_code")
                         append("redirect_uri", "https://bot.herod.dev/api/spotify/oauth_redirect")
                         append("code", "$code")
