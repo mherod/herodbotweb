@@ -3,12 +3,10 @@ package dev.herod.bot.foursquare
 import dev.herod.bot.web.DaggerTestWebComponent
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import javax.inject.Inject
 import kotlin.test.assertEquals
 
-@Ignore
 class FoursquareClientTest {
 
     @Inject
@@ -19,7 +17,6 @@ class FoursquareClientTest {
         DaggerTestWebComponent.builder().build().inject(this)
     }
 
-    @Ignore
     @Test
     fun searchVenue() {
         runBlocking {
