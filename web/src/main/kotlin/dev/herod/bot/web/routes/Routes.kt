@@ -31,7 +31,6 @@ class Routes @Inject constructor(
 ) : RoutesInstaller {
 
     override fun install(route: Route) {
-
         route.post {
             call.respond(HttpStatusCode.OK)
         }
