@@ -8,8 +8,10 @@ fun getEnv(name: String): String {
 }
 
 private fun getEnvFromFile(name: String): String {
+
     return runCatching {
-        File("../.env").readLines()
+        File("./WEB-INF/classes/env.properties")
+            .readLines()
             .first { it.startsWith("$name=") }
             .substringAfter('=')
     }.getOrThrow()
