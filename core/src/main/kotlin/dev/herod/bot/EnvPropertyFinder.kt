@@ -1,18 +1,22 @@
 package dev.herod.bot
 
 import java.io.File
+import java.nio.file.Files
+import kotlin.streams.asSequence
 
 object EnvPropertyFinder {
 
     private fun findFile(fileName: String, searchFile: File = File(".")): File? {
-        return when {
-            searchFile.isFile && searchFile.name == fileName -> searchFile
-            else -> searchFile.listFiles()?.mapNotNull { findFile(fileName, it) }?.firstOrNull()
-        }
+
+        return Files.walk(searchFile.toPath())
+            ?.asSequence()
+            ?.filter { Files.isRegularFile(it) }
+            ?.map { it.toFile() }
+            ?.firstOrNull { it.name == fileName }
     }
 
     fun getEnv(name: String): String {
-        return runCatching { getEnv(name) }
+        return runCatching { System.getenv(name) }
             .getOrElse { getEnvFromFile(name) }
     }
 
@@ -29,8 +33,9 @@ object EnvPropertyFinder {
                 .readLines()
                 .first { it.startsWith("$name=") }
                 .substringAfter('=')
-        }.onFailure {
+        }.onFailure { throwable ->
             println("Current directory: ${File(".").absolutePath}")
+            throwable.printStackTrace()
         }.getOrThrow()
     }
 }
