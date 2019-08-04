@@ -8,10 +8,13 @@ fun getEnv(name: String): String {
 }
 
 private fun getEnvFromFile(name: String): String {
+
     return runCatching {
         File("./WEB-INF/classes/env.properties")
             .readLines()
             .first { it.startsWith("$name=") }
             .substringAfter('=')
+    }.onFailure {
+        println("Current directory: ${File(".").absolutePath}")
     }.getOrThrow()
 }

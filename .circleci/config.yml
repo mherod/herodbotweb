@@ -31,7 +31,7 @@ jobs:
   build:
     working_directory: *workspace
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/android:api-28
     environment:
       TERM: dumb
       JVM_OPTS: "-Xmx3200m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
@@ -50,6 +50,9 @@ jobs:
       - *restore_cache_dependencies
       - *restore_cache_build
       - run: find . -type f -regex ".*/build/.*" -delete
+      - run: echo $GOOGLE_SERVICE_ACCOUNT_BLOB | base64 -d -i > key.json
+      - run: gcloud auth activate-service-account ${GOOGLE_SERVICE_ACCOUNT} --key-file key.json
+      - run: gcloud config set project ${GOOGLE_PROJECT_ID}
       - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
       - run:
           name: Quick smoke test
