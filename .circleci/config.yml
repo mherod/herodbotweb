@@ -55,12 +55,10 @@ jobs:
       - run: yes | gcloud projects list --format='value(project_id)' || true
       - run: gcloud config set project $(gcloud projects list --format='value(project_id)' | head -n1)
       - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
-      - run:
-          name: Quick smoke test
-          command: |
-            ./gradlew runShadow &
-            sleep 5
-            curl -L -v -f http://localhost:8080/
+      - run: ./gradlew appengineStart
+      - run: curl -L -v -f http://localhost:8080/
+      - run: ./gradlew appengineStop
+      - run: ./gradlew appengineDeploy
       - *save_cache_dependencies
       - *save_cache_build
       - run:
