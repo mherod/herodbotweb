@@ -56,6 +56,7 @@ jobs:
       - run: gcloud config set project $(gcloud projects list --format='value(project_id)' | head -n1)
       - run: env >| web/src/main/resources/env.properties
       - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
+      - run: yes | gcloud components install app-engine-java
       - run: ./gradlew appengineStart
       - run: curl -L -v -f http://localhost:8080/
       - run: ./gradlew appengineStop
