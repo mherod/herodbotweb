@@ -7,7 +7,6 @@ import kotlin.streams.asSequence
 object EnvPropertyFinder {
 
     private fun findFile(fileName: String, searchFile: File = File(".")): File? {
-
         return Files.walk(searchFile.toPath())
             ?.asSequence()
             ?.filter { Files.isRegularFile(it) }
@@ -17,9 +16,11 @@ object EnvPropertyFinder {
 
     fun getEnv(name: String): String {
         return runCatching { System.getenv(name) }
+            .onFailure { println("Searching for $name in properties files") }
             .getOrElse { getEnvFromFile(name) }
     }
 
+    // TODO cache values
     private fun getEnvFromFile(name: String): String {
         return runCatching {
             val propertiesFile = findFile(
