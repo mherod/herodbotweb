@@ -52,7 +52,8 @@ jobs:
       - run: find . -type f -regex ".*/build/.*" -delete
       - run: echo $GOOGLE_SERVICE_ACCOUNT_BLOB | base64 -d -i > key.json
       - run: gcloud auth activate-service-account ${GOOGLE_SERVICE_ACCOUNT} --key-file key.json
-      - run: gcloud config set project ${GOOGLE_PROJECT_ID}
+      - run: gcloud projects list
+      - run: gcloud config set project $(gcloud projects list --format='value(project_id)' | head -n1)
       - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
       - run:
           name: Quick smoke test
