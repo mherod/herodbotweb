@@ -8,7 +8,6 @@ fun getEnv(name: String): String {
 }
 
 private fun getEnvFromFile(name: String): String {
-
     return runCatching {
         File("./WEB-INF/classes/env.properties")
             .readLines()
