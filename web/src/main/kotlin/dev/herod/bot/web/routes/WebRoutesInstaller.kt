@@ -6,13 +6,14 @@ import io.ktor.application.call
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
+import io.ktor.util.toMap
 import javax.inject.Inject
 
 class WebRoutesInstaller @Inject constructor() : RoutesInstaller {
     override fun install(route: Route) {
         route.get {
             call.respondText {
-                "Hello $call"
+                "Hello $call, ${call.request.headers.toMap()}"
             }
         }
         route.get("/check") {

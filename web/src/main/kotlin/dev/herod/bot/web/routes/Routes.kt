@@ -70,7 +70,7 @@ class Routes @Inject constructor(
         }
 
         @Suppress("EXPERIMENTAL_API_USAGE")
-        route.host("api\\..*".toRegex(), 0) {
+        route.host("api\\..*".toRegex()) {
             apiRoutesInstaller.install(this)
         }
 
