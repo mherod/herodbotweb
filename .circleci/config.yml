@@ -38,10 +38,10 @@ jobs:
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3200m"'
       PORT: 8080
     steps:
-      - run: sudo apt-get -y update && sudo apt-get -y install apt-transport-https ca-certificates
+      - run: sudo apt-get -yq update && sudo apt-get -yq install apt-transport-https ca-certificates
       - run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
       - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-      - run: sudo apt-get -y update && sudo apt-get -y install google-cloud-sdk google-cloud-sdk-app-engine-java
+      - run: sudo apt-get -yq update && sudo apt-get -yq install google-cloud-sdk google-cloud-sdk-app-engine-java
       - checkout
       - run:
           name: Write jvmargs to gradle.properties
