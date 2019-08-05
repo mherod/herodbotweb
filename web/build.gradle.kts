@@ -23,6 +23,13 @@ application {
     mainClassName = "io.ktor.server.netty.EngineMain"
 }
 
+appengine {
+    deploy {
+        projectId = "GCLOUD_CONFIG"
+        version = "GCLOUD_CONFIG"
+    }
+}
+
 repositories {
     mavenLocal()
     jcenter()
