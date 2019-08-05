@@ -1,6 +1,6 @@
 package dev.herod.bot.db
 
-import dev.herod.bot.getEnv
+import dev.herod.bot.EnvPropertyFinder.getEnv
 import java.net.URI
 import java.net.URISyntaxException
 import java.sql.Connection

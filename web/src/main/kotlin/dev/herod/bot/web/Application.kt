@@ -8,8 +8,10 @@ import io.ktor.application.install
 import io.ktor.auth.Authentication
 import io.ktor.auth.Principal
 import io.ktor.auth.basic
+import io.ktor.features.CallLogging
 import io.ktor.features.Compression
 import io.ktor.features.ContentNegotiation
+import io.ktor.features.DefaultHeaders
 import io.ktor.features.deflate
 import io.ktor.features.gzip
 import io.ktor.features.minimumSize
@@ -29,6 +31,10 @@ private val dependencies = ApplicationDependencies()
 @JvmOverloads
 fun Application.module(testing: Boolean = false) {
     webComponent.inject(dependencies)
+
+    install(DefaultHeaders)
+
+    install(CallLogging)
 
     install(Compression) {
         gzip {

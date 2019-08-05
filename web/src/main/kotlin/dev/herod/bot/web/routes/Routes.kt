@@ -1,7 +1,7 @@
 package dev.herod.bot.web.routes
 
+import dev.herod.bot.EnvPropertyFinder
 import dev.herod.bot.db.DbConnection
-import dev.herod.bot.getEnv
 import dev.herod.bot.web.framework.RoutesInstaller
 import dev.herod.bot.web.postBody
 import io.ktor.application.ApplicationCallPipeline
@@ -18,6 +18,7 @@ import io.ktor.response.respondRedirect
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.routing.get
+import io.ktor.routing.host
 import io.ktor.routing.post
 import io.ktor.routing.route
 import java.io.File
@@ -26,8 +27,7 @@ import javax.inject.Inject
 
 class Routes @Inject constructor(
     private val webRoutesInstaller: WebRoutesInstaller,
-    private val foursquareRoutesInstaller: FoursquareRoutesInstaller,
-    private val spotifyRoutesInstaller: SpotifyRoutesInstaller
+    private val apiRoutesInstaller: ApiRoutesInstaller
 ) : RoutesInstaller {
 
     override fun install(route: Route) {
@@ -64,16 +64,18 @@ class Routes @Inject constructor(
             }
             webRoutesInstaller.install(this)
         }
+
         route.route("/api") {
-            route("/4sq") {
-                foursquareRoutesInstaller.install(this)
-            }
-            route("/spotify") {
-                spotifyRoutesInstaller.install(this)
-            }
+            apiRoutesInstaller.install(this)
         }
+
+        @Suppress("EXPERIMENTAL_API_USAGE")
+        route.host("api\\..*".toRegex()) {
+            apiRoutesInstaller.install(this)
+        }
+
         route.get("dump") {
-            println(getEnv("DATABASE_URL"))
+            println(EnvPropertyFinder.getEnv("DATABASE_URL"))
             call.respondRedirect {
                 port = 443
                 path("")

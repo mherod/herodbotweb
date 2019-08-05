@@ -38,6 +38,10 @@ jobs:
       GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3200m"'
       PORT: 8080
     steps:
+      - run: sudo apt-get -y update && sudo apt-get -y install apt-transport-https ca-certificates
+      - run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+      - run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+      - run: sudo apt-get -y update && sudo apt-get -y install google-cloud-sdk google-cloud-sdk-app-engine-java
       - checkout
       - run:
           name: Write jvmargs to gradle.properties
@@ -50,13 +54,16 @@ jobs:
       - *restore_cache_dependencies
       - *restore_cache_build
       - run: find . -type f -regex ".*/build/.*" -delete
+      - run: echo $GOOGLE_SERVICE_ACCOUNT_BLOB | base64 -d -i > key.json
+      - run: gcloud auth activate-service-account ${GOOGLE_SERVICE_ACCOUNT} --key-file key.json
+      - run: yes | gcloud projects list --format='value(project_id)' || true
+      - run: gcloud config set project $(gcloud projects list --format='value(project_id)' | head -n1)
+      - run: env >| web/src/main/resources/env.properties
       - run: ./gradlew clean build test installShadowDist --rerun-tasks --stacktrace
-      - run:
-          name: Quick smoke test
-          command: |
-            ./gradlew runShadow &
-            sleep 5
-            curl -L -v -f http://localhost:8080/
+      - run: ./gradlew appengineStart
+      - run: curl -L -v -f http://localhost:8080/
+      - run: ./gradlew appengineStop
+      - run: ./gradlew appengineDeploy
       - *save_cache_dependencies
       - *save_cache_build
       - run:

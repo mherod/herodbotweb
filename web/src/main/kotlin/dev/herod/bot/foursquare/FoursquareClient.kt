@@ -1,7 +1,7 @@
 package dev.herod.bot.foursquare
 
 import dev.herod.AccessTokenResponse
-import dev.herod.bot.getEnv
+import dev.herod.bot.EnvPropertyFinder
 import dev.herod.foursquare.FoursquareCheckinResponse
 import dev.herod.foursquare.FoursquareVenueResponse
 import io.ktor.client.HttpClient
@@ -22,7 +22,7 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
             host = "foursquare.com"
             path("oauth2", "authenticate")
             with(parameters) {
-                append("client_id", getEnv("FOURSQUARE_CLIENT_ID"))
+                append("client_id", EnvPropertyFinder.getEnv("FOURSQUARE_CLIENT_ID"))
                 append("response_type", "code")
                 append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
             }
@@ -35,8 +35,8 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
                 host = "foursquare.com"
                 path("oauth2", "access_token")
                 with(parameters) {
-                    append("client_id", getEnv("FOURSQUARE_CLIENT_ID"))
-                    append("client_secret", getEnv("FOURSQUARE_CLIENT_SECRET"))
+                    append("client_id", EnvPropertyFinder.getEnv("FOURSQUARE_CLIENT_ID"))
+                    append("client_secret", EnvPropertyFinder.getEnv("FOURSQUARE_CLIENT_SECRET"))
                     append("grant_type", "authorization_code")
                     append("redirect_uri", "https://bot.herod.dev/api/4sq/oauth_redirect")
                     append("code", "$code")
@@ -53,9 +53,9 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
     ): FoursquareVenueResponse {
         return httpClient.get {
             url(
-                "https://api.foursquare.com/v2/venues/search?intent=$intent&query=$query&ll=$longitude,$latitude&client_id=${getEnv(
+                "https://api.foursquare.com/v2/venues/search?intent=$intent&query=$query&ll=$longitude,$latitude&client_id=${EnvPropertyFinder.getEnv(
                     "FOURSQUARE_CLIENT_ID"
-                )}&client_secret=${getEnv("FOURSQUARE_CLIENT_SECRET")}&v=20180323"
+                )}&client_secret=${EnvPropertyFinder.getEnv("FOURSQUARE_CLIENT_SECRET")}&v=20180323"
             )
         }
     }
@@ -63,9 +63,9 @@ class FoursquareClient @Inject constructor(private val httpClient: HttpClient) {
     suspend fun venueCheckin(venueId: String): FoursquareCheckinResponse {
         val params = mapOf(
             "venueId" to venueId,
-            "client_id" to getEnv("FOURSQUARE_CLIENT_ID"),
-            "client_secret" to getEnv("FOURSQUARE_CLIENT_SECRET"),
-            "oauth_token" to getEnv("FOURSQUARE_ACCESS_TOKEN"),
+            "client_id" to EnvPropertyFinder.getEnv("FOURSQUARE_CLIENT_ID"),
+            "client_secret" to EnvPropertyFinder.getEnv("FOURSQUARE_CLIENT_SECRET"),
+            "oauth_token" to EnvPropertyFinder.getEnv("FOURSQUARE_ACCESS_TOKEN"),
             "v" to "20180323"
         )
 
