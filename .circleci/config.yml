@@ -63,7 +63,8 @@ jobs:
       - run: ./gradlew appengineStart
       - run: curl -L -v -f http://localhost:8080/
       - run: ./gradlew appengineStop
-      - run: ./gradlew appengineDeploy
+      - run: ./gradlew appengineDeployAll
+      - run: curl -L -v -f https://$(gcloud projects list --format='value(project_id)' | head -n1).appspot.com/
       - *save_cache_dependencies
       - *save_cache_build
       - run:
