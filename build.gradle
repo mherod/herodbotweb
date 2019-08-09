@@ -20,7 +20,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-        classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.1'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.1.0'
         classpath 'com.squareup.sqldelight:gradle-plugin:1.1.4'
         classpath "com.google.cloud.tools:appengine-gradle-plugin:$appengine_plugin_version"
     }
